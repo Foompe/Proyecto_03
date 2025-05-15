@@ -7,6 +7,7 @@ package proyecto.geonorte.controlador;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import proyecto.geonorte.modelo.dao.ClienteDAO;
 import proyecto.geonorte.vista.ClienteJFrame;
@@ -21,101 +22,133 @@ import proyecto.geonorte.vista.NuevoClienteJPanel;
  * @author FP DAM
  */
 public class ClienteControlador {
-    
-       
+
     private MenuJFrame menu;
     private ClienteJFrame cliente;
-    private ListaClientesJPanel lisCliente;
+    private ListaClientesControlador listaClientesControl;
     private NuevoClienteControlador nuevoCliente;
     private ModificClienteJPanel modificCliente;
     private ConsultaClienteJPanel consultaCliente;
     private ClienteDAO clienteDAO = new ClienteDAO();
-    
-    
-    
-    
+
     public ClienteControlador(MenuJFrame menuVista) {
         this.menu = menuVista;
         cliente = new ClienteJFrame();
         inicializarEventos();       //inicializamos el metodo encargado de escuchar
-       
+
         cliente.setVisible(true);
-        
-        lisCliente = new ListaClientesJPanel();
-        mostrarPanelCentral(lisCliente);  
+
+        listaClientesControl = new ListaClientesControlador(ClienteControlador.this, clienteDAO);
+        mostrarPanelCentral(listaClientesControl.getVista());
     }
-    
-    
+
     //metodo para mostrar pantallas en el panel central
     public void mostrarPanelCentral(JPanel panel) {
         System.out.println("Cambiando panel central a: " + panel.getClass().getSimpleName());
-        panel.setSize(1000,600);
-        panel.setLocation(0,0);
-        
+        panel.setSize(1000, 600);
+        panel.setLocation(0, 0);
+
         cliente.getPanelPantalla().removeAll();
         cliente.getPanelPantalla().add(panel, BorderLayout.CENTER);
         cliente.getPanelPantalla().revalidate();
         cliente.getPanelPantalla().repaint();
     }
-    
-    
+
     public void volverLista() {
-        mostrarPanelCentral(lisCliente);
+        mostrarPanelCentral(listaClientesControl.getVista());
     }
-    
+
     private void inicializarEventos() {
-        cliente.getjButtonNuevoCliente().addActionListener(new ActionListener() { 
+        cliente.getjButtonNuevoCliente().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //accion boton nuevo cliente
                 System.out.println("Has pulsado nuevo cliente");
-                nuevoCliente = new NuevoClienteControlador(ClienteControlador.this, clienteDAO);
+                nuevoCliente = new NuevoClienteControlador(ClienteControlador.this, clienteDAO, listaClientesControl);
                 mostrarPanelCentral(nuevoCliente.getVista());
-                
+
             }
         });
-        
-        cliente.getjButtonModificarCliente().addActionListener(new ActionListener() { 
+
+        cliente.getjButtonModificarCliente().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //accion boton modificar cliente 
                 System.out.println("Has pulsado modificar cliente");
                 modificCliente = new ModificClienteJPanel();
                 mostrarPanelCentral(modificCliente);
+                if (listaClientesControl.elementoSelecionado() <= 0) {
+                    JOptionPane.showMessageDialog(null, "Seleccione un cliente válido.");
+                    return;
+                }
             }
         });
-        
-        cliente.getjButtonConsultarCliente().addActionListener(new ActionListener() { 
+
+        cliente.getjButtonConsultarCliente().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //accion boton consultar cliente
                 System.out.println("Has pulsado consultar cliente");
                 consultaCliente = new ConsultaClienteJPanel();
                 mostrarPanelCentral(consultaCliente);
-                
+
             }
         });
-        
-        cliente.getjButtonBorrarCliente().addActionListener(new ActionListener() { 
+
+        cliente.getjButtonBorrarCliente().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //accion boton borrar cliente
-                System.out.println("Has pulsado borrar cliente");
-                
+                int indice = listaClientesControl.elementoSelecionado(); //traemos el elemento seleccionado de la lista
+
+                if (indice >= 0) {
+                    clienteDAO.getClientes().get(indice);
+
+                    String mensaje = "Borrar cliente: \n" + 
+                                     clienteDAO.getClientes().get(indice).getCod_cliente() + " - " +
+                                     clienteDAO.getClientes().get(indice).getNif() + " - " +
+                                     clienteDAO.getClientes().get(indice).getRazon_social();
+                            
+                    int opcion = JOptionPane.showConfirmDialog(
+                            null,
+                            mensaje,
+                            "Confirmar borrado",
+                            JOptionPane.YES_NO_OPTION
+                    );
+
+                    if (opcion == JOptionPane.YES_OPTION) {
+                        clienteDAO.getClientes().remove(indice);
+
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Cliente borrado.",
+                                "Borrado exitoso",
+                                JOptionPane.INFORMATION_MESSAGE
+                        );
+
+                        // Actualizar la lista
+                        listaClientesControl.cargaClientes(); // ← asumimos que tenés este método en el controlador
+
+                    } // Si es NO, no hacés nada
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "Selecciona un cliente para borrar.");
+                }
+
             }
         });
-        
-        cliente.getjButtonAtras().addActionListener(new ActionListener() { 
+
+        cliente.getjButtonAtras().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //accion boton atras
                 System.out.println("Has pulsado atras");
-                cliente.dispose();      //cerramos la ventana
+                cliente.dispose();      //cerramos la vista cliente
                 menu.setVisible(true); //traemos menu de vuelta
             }
         });
-        
-        cliente.getjButtonSalir().addActionListener(new ActionListener() { 
+
+        cliente.getjButtonSalir().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //accion boton salir
                 System.out.println("Has pulsado Salir");
                 System.exit(0);
-                
+
             }
         });
     }
