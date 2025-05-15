@@ -12,10 +12,9 @@ import javax.swing.JPanel;
 import proyecto.geonorte.modelo.dao.ClienteDAO;
 import proyecto.geonorte.vista.ClienteJFrame;
 import proyecto.geonorte.vista.ConsultaClienteJPanel;
-import proyecto.geonorte.vista.ListaClientesJPanel;
+
 import proyecto.geonorte.vista.MenuJFrame;
-import proyecto.geonorte.vista.ModificClienteJPanel;
-import proyecto.geonorte.vista.NuevoClienteJPanel;
+
 
 /**
  *
@@ -27,8 +26,8 @@ public class ClienteControlador {
     private ClienteJFrame cliente;
     private ListaClientesControlador listaClientesControl;
     private NuevoClienteControlador nuevoCliente;
-    private ModificClienteJPanel modificCliente;
-    private ConsultaClienteJPanel consultaCliente;
+    private ModificacionClienteControlador modificCliente;
+    private ConsultaClienteControlador consultaCliente;
     private ClienteDAO clienteDAO = new ClienteDAO();
 
     public ClienteControlador(MenuJFrame menuVista) {
@@ -54,30 +53,40 @@ public class ClienteControlador {
         cliente.getPanelPantalla().repaint();
     }
 
+    private void setBotonesPanelActivos (boolean activo) {
+        cliente.getjButtonNuevoCliente().setEnabled(activo);
+        cliente.getjButtonModificarCliente().setEnabled(activo);
+        cliente.getjButtonConsultarCliente().setEnabled(activo);
+        cliente.getjButtonBorrarCliente().setEnabled(activo);
+    }
+    
     public void volverLista() {
         mostrarPanelCentral(listaClientesControl.getVista());
+        setBotonesPanelActivos(true);
     }
 
     private void inicializarEventos() {
         cliente.getjButtonNuevoCliente().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //accion boton nuevo cliente
-                System.out.println("Has pulsado nuevo cliente");
+                
                 nuevoCliente = new NuevoClienteControlador(ClienteControlador.this, clienteDAO, listaClientesControl);
                 mostrarPanelCentral(nuevoCliente.getVista());
-
+                setBotonesPanelActivos(false);
             }
         });
 
         cliente.getjButtonModificarCliente().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //accion boton modificar cliente 
-                System.out.println("Has pulsado modificar cliente");
-                modificCliente = new ModificClienteJPanel();
-                mostrarPanelCentral(modificCliente);
-                if (listaClientesControl.elementoSelecionado() <= 0) {
-                    JOptionPane.showMessageDialog(null, "Seleccione un cliente válido.");
-                    return;
+                int indice = listaClientesControl.elementoSelecionado(); //traemos el elemento seleccionado de la lista
+
+                if (indice >= 0) {
+                modificCliente = new ModificacionClienteControlador(indice,ClienteControlador.this, clienteDAO, listaClientesControl);
+                mostrarPanelCentral(modificCliente.getVista());
+                setBotonesPanelActivos(false);
+                }else {
+                    JOptionPane.showMessageDialog(null, "Debes seleccionar primero un cliente");
                 }
             }
         });
@@ -85,10 +94,15 @@ public class ClienteControlador {
         cliente.getjButtonConsultarCliente().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //accion boton consultar cliente
-                System.out.println("Has pulsado consultar cliente");
-                consultaCliente = new ConsultaClienteJPanel();
-                mostrarPanelCentral(consultaCliente);
+                int indice = listaClientesControl.elementoSelecionado(); //traemos el elemento seleccionado de la lista
 
+                if (indice >= 0) {
+                consultaCliente = new ConsultaClienteControlador(indice,ClienteControlador.this, clienteDAO, listaClientesControl);
+                mostrarPanelCentral(consultaCliente.getVista());
+                setBotonesPanelActivos(false);
+                }else {
+                    JOptionPane.showMessageDialog(null, "Debes seleccionar primero un cliente");
+                }
             }
         });
 
