@@ -5,41 +5,61 @@
 package proyecto.geonorte.vista;
 
 import java.awt.BorderLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
  * @author FP DAM
  */
-public class JFrameAreaCliente extends javax.swing.JFrame {
+public class ClienteJFrame extends javax.swing.JFrame {
 
-    private Menu menu;
+    
     /**
      * Creates new form JFrameFormularioCliente
      */
-    public JFrameAreaCliente() {
-        initComponents();
+    public ClienteJFrame() {
+        initComponents();  
         
         setTitle("Area cliente");
         setSize(1000,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         
-        setLocationRelativeTo(null);
-        
-        JPanelListaClientes lisCliente = new JPanelListaClientes();
-        lisCliente.setSize(1000,600);
-        lisCliente.setLocation(0,0);
-    
-        PanelPantalla.removeAll();
-        PanelPantalla.add(lisCliente, BorderLayout.CENTER);
-        PanelPantalla.revalidate();
-        PanelPantalla.repaint();
+        setLocationRelativeTo(null);   
     }
 
-    public void setMenu(Menu menu) {
-        this.menu = menu;
+    public JPanel getPanelPantalla() {
+        return PanelPantalla;
     }
+
+    public JButton getjButtonAtras() {
+        return jButtonAtras;
+    }
+
+    public JButton getjButtonBorrarCliente() {
+        return jButtonBorrarCliente;
+    }
+
+    public JButton getjButtonConsultarCliente() {
+        return jButtonConsultarCliente;
+    }
+
+    public JButton getjButtonModificarCliente() {
+        return jButtonModificarCliente;
+    }
+
+    public JButton getjButtonNuevoCliente() {
+        return jButtonNuevoCliente;
+    }
+
+    public JButton getjButtonSalir() {
+        return jButtonSalir;
+    }
+
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,7 +85,6 @@ public class JFrameAreaCliente extends javax.swing.JFrame {
         PanelPantalla = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1000, 600));
         setMinimumSize(new java.awt.Dimension(1000, 600));
 
         jPanelTitulo.setBackground(new java.awt.Color(35, 120, 125));
@@ -86,23 +105,13 @@ public class JFrameAreaCliente extends javax.swing.JFrame {
         jButtonAtras.setBackground(new java.awt.Color(225, 235, 237));
         jButtonAtras.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButtonAtras.setForeground(new java.awt.Color(0, 51, 51));
-        jButtonAtras.setText("Atras");
-        jButtonAtras.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAtrasActionPerformed(evt);
-            }
-        });
+        jButtonAtras.setText("Menú");
         jPanelAbajo.add(jButtonAtras);
 
         jButtonSalir.setBackground(new java.awt.Color(225, 235, 237));
         jButtonSalir.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButtonSalir.setForeground(new java.awt.Color(0, 51, 51));
         jButtonSalir.setText("Salir");
-        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalirActionPerformed(evt);
-            }
-        });
         jPanelAbajo.add(jButtonSalir);
 
         getContentPane().add(jPanelAbajo, java.awt.BorderLayout.PAGE_END);
@@ -118,11 +127,6 @@ public class JFrameAreaCliente extends javax.swing.JFrame {
         jButtonNuevoCliente.setMaximumSize(new java.awt.Dimension(120, 60));
         jButtonNuevoCliente.setMinimumSize(new java.awt.Dimension(120, 60));
         jButtonNuevoCliente.setPreferredSize(new java.awt.Dimension(120, 60));
-        jButtonNuevoCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNuevoClienteActionPerformed(evt);
-            }
-        });
         jPanelBotones.add(jButtonNuevoCliente);
         jPanelBotones.add(filler3);
 
@@ -133,11 +137,6 @@ public class JFrameAreaCliente extends javax.swing.JFrame {
         jButtonModificarCliente.setMaximumSize(new java.awt.Dimension(120, 60));
         jButtonModificarCliente.setMinimumSize(new java.awt.Dimension(120, 60));
         jButtonModificarCliente.setPreferredSize(new java.awt.Dimension(120, 60));
-        jButtonModificarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonModificarClienteActionPerformed(evt);
-            }
-        });
         jPanelBotones.add(jButtonModificarCliente);
         jPanelBotones.add(filler1);
 
@@ -148,11 +147,6 @@ public class JFrameAreaCliente extends javax.swing.JFrame {
         jButtonConsultarCliente.setMaximumSize(new java.awt.Dimension(120, 60));
         jButtonConsultarCliente.setMinimumSize(new java.awt.Dimension(120, 60));
         jButtonConsultarCliente.setPreferredSize(new java.awt.Dimension(120, 60));
-        jButtonConsultarCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConsultarClienteActionPerformed(evt);
-            }
-        });
         jPanelBotones.add(jButtonConsultarCliente);
         jPanelBotones.add(filler2);
 
@@ -169,63 +163,11 @@ public class JFrameAreaCliente extends javax.swing.JFrame {
 
         PanelPantalla.setMaximumSize(new java.awt.Dimension(870, 480));
         PanelPantalla.setMinimumSize(new java.awt.Dimension(870, 480));
-        PanelPantalla.setOpaque(false);
         PanelPantalla.setLayout(new java.awt.BorderLayout());
         getContentPane().add(PanelPantalla, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
-        // TODO add your handling code here:
-        menu.setVisible(true); //mostramos la ventana creada
-        this.setVisible(false); //escondemos esta ventana
-        
-    }//GEN-LAST:event_jButtonAtrasActionPerformed
-
-    private void jButtonModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarClienteActionPerformed
-    //llamamos al panel, modificar
-    
-    JPanelModificacionCliente modCliente = new JPanelModificacionCliente();
-    modCliente.setSize(1000,600);
-    modCliente.setLocation(0,0);
-    
-    PanelPantalla.removeAll();
-    PanelPantalla.add(modCliente, BorderLayout.CENTER);
-    PanelPantalla.revalidate();
-    PanelPantalla.repaint();
-        
-    }//GEN-LAST:event_jButtonModificarClienteActionPerformed
-
-    private void jButtonNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoClienteActionPerformed
-        //llamamos al panel: registrar
-    
-    JPanelRegistroCliente regCliente = new JPanelRegistroCliente();
-    regCliente.setSize(1000,600);
-    regCliente.setLocation(0,0);
-    
-    PanelPantalla.removeAll();
-    PanelPantalla.add(regCliente, BorderLayout.CENTER);
-    PanelPantalla.revalidate();
-    PanelPantalla.repaint();
-    }//GEN-LAST:event_jButtonNuevoClienteActionPerformed
-
-    private void jButtonConsultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarClienteActionPerformed
-        //llamamos al panel: registrar
-    
-    JPanelConsultaCliente conCliente = new JPanelConsultaCliente();
-    conCliente.setSize(1000,600);
-    conCliente.setLocation(0,0);
-    
-    PanelPantalla.removeAll();
-    PanelPantalla.add(conCliente, BorderLayout.CENTER);
-    PanelPantalla.revalidate();
-    PanelPantalla.repaint();
-    }//GEN-LAST:event_jButtonConsultarClienteActionPerformed
-
-    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jButtonSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,21 +186,27 @@ public class JFrameAreaCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameAreaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameAreaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameAreaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameAreaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClienteJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrameAreaCliente().setVisible(true);
+                new ClienteJFrame().setVisible(true);
             }
         });
     }

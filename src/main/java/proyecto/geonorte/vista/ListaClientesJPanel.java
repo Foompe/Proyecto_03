@@ -4,6 +4,8 @@
  */
 package proyecto.geonorte.vista;
 
+import javax.swing.JList;
+
 /**
  *
  * @author FP DAM
@@ -16,7 +18,10 @@ public class ListaClientesJPanel extends javax.swing.JPanel {
     public ListaClientesJPanel() {
         initComponents();
         setVisible(true);
-        
+    }
+
+    public JList<String> getjList_Clientes() {
+        return jList_Clientes;
     }
 
     /**
@@ -32,7 +37,7 @@ public class ListaClientesJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        jList_Clientes = new javax.swing.JList<>();
 
         setMaximumSize(new java.awt.Dimension(870, 480));
         setMinimumSize(new java.awt.Dimension(870, 480));
@@ -54,24 +59,27 @@ public class ListaClientesJPanel extends javax.swing.JPanel {
 
         jScrollPane2.setBackground(new java.awt.Color(245, 243, 239));
         jScrollPane2.setForeground(new java.awt.Color(245, 243, 239));
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane2.setMaximumSize(new java.awt.Dimension(840, 360));
         jScrollPane2.setMinimumSize(new java.awt.Dimension(840, 360));
         jScrollPane2.setName(""); // NOI18N
         jScrollPane2.setPreferredSize(new java.awt.Dimension(840, 360));
         jScrollPane2.setRequestFocusEnabled(false);
 
-        jList2.setBackground(new java.awt.Color(245, 243, 239));
-        jList2.setForeground(new java.awt.Color(0, 51, 51));
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+        jList_Clientes.setBackground(new java.awt.Color(245, 243, 239));
+        jList_Clientes.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
+        jList_Clientes.setForeground(new java.awt.Color(0, 51, 51));
+        jList_Clientes.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jList2.setMaximumSize(new java.awt.Dimension(840, 350));
-        jList2.setMinimumSize(new java.awt.Dimension(840, 350));
-        jList2.setName(""); // NOI18N
-        jList2.setPreferredSize(new java.awt.Dimension(840, 350));
-        jScrollPane2.setViewportView(jList2);
+        jList_Clientes.setMaximumSize(new java.awt.Dimension(840, 350));
+        jList_Clientes.setMinimumSize(new java.awt.Dimension(840, 350));
+        jList_Clientes.setName(""); // NOI18N
+        jList_Clientes.setPreferredSize(new java.awt.Dimension(840, 350));
+        jScrollPane2.setViewportView(jList_Clientes);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -96,7 +104,7 @@ public class ListaClientesJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JList<String> jList_Clientes;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;

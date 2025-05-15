@@ -10,20 +10,20 @@ import javax.swing.*;
  *
  * @author FP DAM
  */
-public class Menu extends javax.swing.JFrame {
+public class MenuJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
      */
-    public Menu() {
+    public MenuJFrame() {
         initComponents();
-        
+              
         setTitle("Menu");
         setSize(1000,600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null);       
     }
 
     /**
@@ -81,11 +81,6 @@ public class Menu extends javax.swing.JFrame {
         jButtonServicio.setMaximumSize(new java.awt.Dimension(150, 50));
         jButtonServicio.setMinimumSize(new java.awt.Dimension(150, 50));
         jButtonServicio.setPreferredSize(new java.awt.Dimension(150, 50));
-        jButtonServicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonServicioActionPerformed(evt);
-            }
-        });
 
         jButtonP_Enlace.setBackground(new java.awt.Color(225, 235, 237));
         jButtonP_Enlace.setForeground(new java.awt.Color(0, 51, 51));
@@ -105,15 +100,14 @@ public class Menu extends javax.swing.JFrame {
         jButtonCliente.setMaximumSize(new java.awt.Dimension(150, 50));
         jButtonCliente.setMinimumSize(new java.awt.Dimension(150, 50));
         jButtonCliente.setPreferredSize(new java.awt.Dimension(150, 50));
-        jButtonCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonClienteActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("GeoNorte S.A.");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/LogoEmpresa_930x210_color_exacto.png"))); // NOI18N
+        jLabel1.setAutoscrolls(true);
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabel1.setName(""); // NOI18N
+        jLabel1.setOpaque(true);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,10 +117,6 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jSeparator1)
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 926, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(105, 105, 105)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -136,17 +126,21 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonP_Enlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonProyecto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonEmpleado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(120, 120, 120))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -170,33 +164,12 @@ public class Menu extends javax.swing.JFrame {
         jButtonSalir.setBackground(new java.awt.Color(225, 235, 237));
         jButtonSalir.setForeground(new java.awt.Color(0, 51, 51));
         jButtonSalir.setText("Salir");
-        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSalirActionPerformed(evt);
-            }
-        });
         jPanel2.add(jButtonSalir);
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteActionPerformed
-        // TODO add your handling code here:
-        JFrameAreaCliente areaCliente = new JFrameAreaCliente();
-        areaCliente.setMenu(this);
-        areaCliente.setVisible(true); //mostramos la ventana creada
-        this.setVisible(false); //escondemos esta ventana
-    }//GEN-LAST:event_jButtonClienteActionPerformed
-
-    private void jButtonServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonServicioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonServicioActionPerformed
-
-    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
-       System.exit(0);
-    }//GEN-LAST:event_jButtonSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,24 +188,57 @@ public class Menu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Menu().setVisible(true);
+                new MenuJFrame().setVisible(true);
             }
         });
     }
 
+    public JButton getjButtonCliente() {
+        return jButtonCliente;
+    }
+
+    public JButton getjButtonContrato() {
+        return jButtonContrato;
+    }
+
+    public JButton getjButtonEmpleado() {
+        return jButtonEmpleado;
+    }
+
+    public JButton getjButtonP_Enlace() {
+        return jButtonP_Enlace;
+    }
+
+    public JButton getjButtonProyecto() {
+        return jButtonProyecto;
+    }
+
+    public JButton getjButtonSalir() {
+        return jButtonSalir;
+    }
+
+    public JButton getjButtonServicio() {
+        return jButtonServicio;
+    }
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCliente;
     private javax.swing.JButton jButtonContrato;

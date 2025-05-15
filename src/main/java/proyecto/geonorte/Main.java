@@ -4,16 +4,20 @@
 
 package proyecto.geonorte;
 
-import proyecto.geonorte.vista.Menu;
+import proyecto.geonorte.controlador.MenuControlador;
+
 
 /**
  *
  * @author FP DAM
  */
-public class GeoNorte {
+public class Main {
 
     public static void main(String[] args) {
-        Menu menu = new Menu();
-        menu.setVisible(true);
+        
+      //  ConexionBD conexionbd = new ConexionBD();
+      new MenuControlador();  
+      
+      
     }
 }
