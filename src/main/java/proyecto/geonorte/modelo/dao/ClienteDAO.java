@@ -23,7 +23,6 @@ public class ClienteDAO {
 
     //constructor
     public ClienteDAO() {
-        System.out.println("se creo un cliente dao");
         clientes = new ArrayList<>();
         cargaClientesBD();
         
@@ -39,15 +38,13 @@ public class ClienteDAO {
     //Metodo para pasar una lista de los datos de los clientes
     //metodos con la base de datos:
     public void cargaClientesBD() {
-        System.out.println("se lanzo carga de clientes");
         clientes.clear();
         String sentencia = "SELECT * FROM CLIENTE";
-        try (Connection con = ConexionBD.obtenerConexion(); PreparedStatement ps = con.prepareStatement(sentencia); ResultSet rs = ps.executeQuery()) {
-
-            System.out.println("Conexion establecida: " + (con !=null));
-            
+        try (Connection con = ConexionBD.obtenerConexion(); 
+                PreparedStatement ps = con.prepareStatement(sentencia); 
+                ResultSet rs = ps.executeQuery()) {;
+                   
             while (rs.next()) {
-                System.out.println("Entra en el while rs.next");
                  Cliente cliente = new Cliente(
                         rs.getString("COD_CLIENTE"),
                         rs.getString("NIF"),
@@ -59,7 +56,6 @@ public class ClienteDAO {
                         rs.getInt("TLFN"),
                         rs.getString("TIPO_EMPRESA")
                 );
-                 System.out.println("Cliente cargado: " + cliente);
                  clientes.add(cliente);
             }
 
@@ -92,8 +88,8 @@ public class ClienteDAO {
     }
 
     //actualizacion de cliente
-    public void actualizar(Cliente cliente) {
-        String sentencia = "UPDATE cliente SET cod_cliente = ?, nif = ?, razon_social = ?, calle = ?, numero = ?, localidad = ?, cod_postal = ?, tlfn = ?, tipo_empresa = ?";
+    public void actualizar(Cliente cliente, String cod_original, String nif_original) {
+        String sentencia = "UPDATE cliente SET cod_cliente = ?, nif = ?, razon_social = ?, calle = ?, numero = ?, localidad = ?, cod_postal = ?, tlfn = ?, tipo_empresa = ? WHERE cod_cliente = ? AND nif = ?";
         try (Connection con = ConexionBD.obtenerConexion(); PreparedStatement ps = con.prepareStatement(sentencia)) {
 
             ps.setString(1, cliente.getCod_cliente());
@@ -105,7 +101,11 @@ public class ClienteDAO {
             ps.setInt(7, cliente.getCod_postal());
             ps.setInt(8, cliente.getTelefono());
             ps.setString(9, cliente.getTipo_empresa());
-
+            
+            //usamos los valores originales del dato,por si se quiere actualizar
+            ps.setString(10,cod_original);
+            ps.setString(11,nif_original);
+            
             int cantidadFilas = ps.executeUpdate();
             System.out.println(cantidadFilas + " fila/s modificadas");
 
