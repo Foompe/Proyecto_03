@@ -23,7 +23,6 @@ public class ModificacionClienteControlador {
     private ClienteControlador controlCliente;
     private ClienteDAO cliente;
     private ListaClientesControlador listaClientes;
-    
 
     public ModificacionClienteControlador(int indice, ClienteControlador controlCliente, ClienteDAO cliente, ListaClientesControlador listaClientes) {
         this.indice = indice;
@@ -39,7 +38,7 @@ public class ModificacionClienteControlador {
     public void cargarDatosCliente() {
         //tomamos el codigo de cliente para descomponerlo y mostroarlo
         String cod = cliente.getClientes().get(indice).getCod_cliente();
-        String grupo = cod.substring(0,1);  //tomamos la primera posicion
+        String grupo = cod.substring(0, 1);  //tomamos la primera posicion
         String id = cod.substring(1);       //tomamos el resto de posiciones
         //una vez descompuesto el cod_cliente, lo mostramos en la tabla
         //fijamos el radiobutton
@@ -48,7 +47,7 @@ public class ModificacionClienteControlador {
         } else if (grupo.equals("G")) {
             modificCliente.getjRadioButton_GrupoEmpresas().setSelected(true);
         }
-        
+
         modificCliente.getjTextField_ID().setText(id);
         modificCliente.getjTextField_nif().setText(cliente.getClientes().get(indice).getNif());
         modificCliente.getjTextField_RazonSocial().setText(cliente.getClientes().get(indice).getRazon_social());
@@ -84,33 +83,36 @@ public class ModificacionClienteControlador {
                     System.out.println("Faltan campos por completar");
                     return;
                 }
+                try {
+                    if (modificCliente.getjRadioButton_EmpresaUnica().isSelected()) {
+                        pos = "E";
+                    } else if (modificCliente.getjRadioButton_GrupoEmpresas().isSelected()) {
+                        pos = "G";
+                    }
+                    String id = modificCliente.getjTextField_ID().getText();
+                    String nif = modificCliente.getjTextField_nif().getText();
+                    String razon_social = modificCliente.getjTextField_RazonSocial().getText();
+                    String calle = modificCliente.getjTextField_Calle().getText();
+                    int numero = Integer.parseInt(modificCliente.getjTextField_Numero().getText());
+                    String localidad = modificCliente.getjTextField_Localidad().getText();
+                    int cod_postal = Integer.parseInt(modificCliente.getjTextField_cp().getText());
+                    int telefono = Integer.parseInt(modificCliente.getjTextField_telefono().getText());
+                    String tipo_empresa = modificCliente.getjTextField_TipoEmpresa().getText();
 
-                if (modificCliente.getjRadioButton_EmpresaUnica().isSelected()) {
-                    pos = "E";
-                } else if (modificCliente.getjRadioButton_GrupoEmpresas().isSelected()) {
-                    pos = "G";
+                    //tomamos los datos de la clave primaria del objeto para poder identificarlo
+                    String cod_original = cliente.getClientes().get(indice).getCod_cliente();
+                    String nif_original = cliente.getClientes().get(indice).getNif();
+                    //instanciamos un objeto cliente con los datos obtenidos
+                    Cliente clienteD = new Cliente(pos, id, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa);
+                    //llamamos al metodo para insertar el cliente
+                    cliente.actualizar(clienteD, cod_original, nif_original);
+
+                    listaClientes.cargaClientes();
+                    controlCliente.volverLista();
+
+                } catch (NumberFormatException z) {
+                    JOptionPane.showMessageDialog(null, "En campos númericos debes introducir números");
                 }
-                String id = modificCliente.getjTextField_ID().getText();
-                String nif = modificCliente.getjTextField_nif().getText();
-                String razon_social = modificCliente.getjTextField_RazonSocial().getText();
-                String calle = modificCliente.getjTextField_Calle().getText();
-                int numero = Integer.parseInt(modificCliente.getjTextField_Numero().getText());
-                String localidad = modificCliente.getjTextField_Localidad().getText();
-                int cod_postal = Integer.parseInt(modificCliente.getjTextField_cp().getText());
-                int telefono = Integer.parseInt(modificCliente.getjTextField_telefono().getText());
-                String tipo_empresa = modificCliente.getjTextField_TipoEmpresa().getText();
-
-                //tomamos los datos de la clave primaria del objeto para poder identificarlo
-                String cod_original = cliente.getClientes().get(indice).getCod_cliente();
-                String nif_original = cliente.getClientes().get(indice).getNif();
-                //instanciamos un objeto cliente con los datos obtenidos
-                Cliente clienteD = new Cliente(pos, id, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa);
-                //llamamos al metodo para insertar el cliente
-                cliente.actualizar(clienteD, cod_original, nif_original);
-                
-                
-                listaClientes.cargaClientes();
-                controlCliente.volverLista();
             }
         });
 
