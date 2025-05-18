@@ -10,6 +10,7 @@ package proyecto.geonorte.modelo.VO;
  */
 public class Cliente {
     
+    //atributos de la clase
     private String cod_cliente;
     private String nif;
     private String razon_social;
@@ -21,19 +22,7 @@ public class Cliente {
     private String tipo_empresa;
 
     
-    
-    public Cliente(String pos, String id, String nif, String razon_social, String calle, int numero, String localidad, int cod_postal, int telefono, String tipo_empresa) {
-        this.cod_cliente = pos.concat(id);
-        this.nif = nif;
-        this.razon_social = razon_social;
-        this.calle = calle;
-        this.numero = numero;
-        this.localidad = localidad;
-        this.cod_postal = cod_postal;
-        this.telefono = telefono;
-        this.tipo_empresa = tipo_empresa;
-    }
-
+    //constructor
     public Cliente(String cod_cliente, String nif, String razon_social, String calle, int numero, String localidad, int cod_postal, int telefono, String tipo_empresa) {
         this.cod_cliente = cod_cliente;
         this.nif = nif;
@@ -46,6 +35,8 @@ public class Cliente {
         this.tipo_empresa = tipo_empresa;
     }
     
+    
+    //getters y setter + to string
     public String getCod_cliente() {
         return cod_cliente;
     }
