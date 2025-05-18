@@ -242,7 +242,7 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/LogoEmpresa_930x210_color_exacto.png"/>
+              <Image iconType="3" name="/images/LogoEmpresa.png"/>
             </Property>
             <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>

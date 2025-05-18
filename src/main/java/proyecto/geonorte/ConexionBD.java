@@ -14,11 +14,13 @@ import java.sql.SQLException;
  */
 public class ConexionBD {
 
-    Connection conexion = null;
-    String url = "jdbc:oracle:thin:@localhost:1521:xe";
-    String usuario = "netbeansBD";
-    String contrasena = "netbeansBD";
+    private static final Connection conexion = null;
+    private static final String url = "jdbc:oracle:thin:@localhost:1521:xe";
+    private static final String usuario = "netbeansBD";
+    private static final String contrasena = "netbeansBD";
 
+    
+    /*
     public ConexionBD() {
         try {
             conexion = DriverManager.getConnection(url, usuario, contrasena);
@@ -38,5 +40,9 @@ public class ConexionBD {
         }
 
     }
-
+*/
+    
+    public static Connection obtenerConexion() throws SQLException {
+        return DriverManager.getConnection(url, usuario, contrasena);
+    }
 }

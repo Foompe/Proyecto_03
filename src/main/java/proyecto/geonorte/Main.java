@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
         
-      //  ConexionBD conexionbd = new ConexionBD();
+      //ConexionBD conexionbd = new ConexionBD();
       new MenuControlador();  
       
       

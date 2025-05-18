@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import proyecto.geonorte.modelo.VO.ClienteVO;
+import proyecto.geonorte.modelo.VO.Cliente;
 import proyecto.geonorte.modelo.dao.ClienteDAO;
 import proyecto.geonorte.vista.NuevoClienteJPanel;
 
@@ -75,7 +75,7 @@ public class NuevoClienteControlador {
 
                 
 
-                clienteDAO.getClientes().add(new ClienteVO(pos, id, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa));
+                clienteDAO.getClientes().add(new Cliente(pos, id, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa));
                 
                 
                 listaClientes.cargaClientes();

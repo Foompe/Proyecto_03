@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import proyecto.geonorte.modelo.VO.ClienteVO;
+import proyecto.geonorte.modelo.VO.Cliente;
 import proyecto.geonorte.modelo.dao.ClienteDAO;
 import proyecto.geonorte.vista.ModificClienteJPanel;
 
@@ -98,7 +98,7 @@ public class ModificacionClienteControlador {
                 int telefono = Integer.parseInt(modificCliente.getjTextField_telefono().getText());
                 String tipo_empresa = modificCliente.getjTextField_TipoEmpresa().getText();
 
-                cliente.getClientes().set(indice,new ClienteVO(pos, id, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa));
+                cliente.getClientes().set(indice,new Cliente(pos, id, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa));
 
                 listaClientes.cargaClientes();
                 controlCliente.volverLista();

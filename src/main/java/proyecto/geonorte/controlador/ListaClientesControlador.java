@@ -6,7 +6,7 @@ package proyecto.geonorte.controlador;
 
 import java.util.ArrayList;
 import javax.swing.JPanel;
-import proyecto.geonorte.modelo.VO.ClienteVO;
+import proyecto.geonorte.modelo.VO.Cliente;
 import proyecto.geonorte.modelo.dao.ClienteDAO;
 import proyecto.geonorte.vista.ListaClientesJPanel;
 
@@ -35,7 +35,7 @@ public class ListaClientesControlador {
         //tomamos el array de objetos
         ArrayList<String> datosClientes = new ArrayList<>();
         //recorremos el array de objetos hasta finalizarlo
-        for(ClienteVO cliente : clienteDAO.getClientes()) {
+        for(Cliente cliente : clienteDAO.getClientes()) {
         //en cada una de las vueltas pasamos el to string al array del jpanel
             datosClientes.add(cliente.toString());
         }

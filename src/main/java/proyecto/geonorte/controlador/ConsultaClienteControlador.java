@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import proyecto.geonorte.modelo.VO.ClienteVO;
+import proyecto.geonorte.modelo.VO.Cliente;
 import proyecto.geonorte.modelo.dao.ClienteDAO;
 import proyecto.geonorte.vista.ConsultaClienteJPanel;
 import proyecto.geonorte.vista.ModificClienteJPanel;
