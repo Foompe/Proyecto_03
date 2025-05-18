@@ -6,7 +6,6 @@ package proyecto.geonorte.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import proyecto.geonorte.modelo.VO.Cliente;
@@ -73,10 +72,10 @@ public class NuevoClienteControlador {
                 int telefono = Integer.parseInt(nuevoCliente.getjTextField_telefono().getText());
                 String tipo_empresa = nuevoCliente.getjTextField_TipoEmpresa().getText();
 
-                
-
-                clienteDAO.getClientes().add(new Cliente(pos, id, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa));
-                
+                //instanciamos un objeto cliente con los datos obtenidos
+                Cliente cliente = new Cliente(pos, id, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa);
+                //llamamos al metodo para insertar el cliente
+                clienteDAO.insertar(cliente);
                 
                 listaClientes.cargaClientes();
                 controlCliente.volverLista();

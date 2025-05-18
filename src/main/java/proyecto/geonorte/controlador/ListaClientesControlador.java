@@ -32,6 +32,7 @@ public class ListaClientesControlador {
     
     //metodo que carga los clientes en la lista
     public void cargaClientes () {
+        clienteDAO.cargaClientesBD();
         //tomamos el array de objetos
         ArrayList<String> datosClientes = new ArrayList<>();
         //recorremos el array de objetos hasta finalizarlo

@@ -127,8 +127,12 @@ public class ClienteControlador {
                     );
 
                     if (opcion == JOptionPane.YES_OPTION) {
-                        clienteDAO.getClientes().remove(indice);
-
+                        
+                        //llamamos al metodo de borrado de clientes y le pasamos el objeto indicado en el indice
+                        clienteDAO.borrar(clienteDAO.getClientes().get(indice));
+                        
+                      
+                        
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Cliente borrado.",
@@ -137,9 +141,9 @@ public class ClienteControlador {
                         );
 
                         // Actualizar la lista
-                        listaClientesControl.cargaClientes(); // ← asumimos que tenés este método en el controlador
+                        listaClientesControl.cargaClientes(); 
 
-                    } // Si es NO, no hacés nada
+                    } 
 
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecciona un cliente para borrar.");

@@ -23,6 +23,7 @@ public class ModificacionClienteControlador {
     private ClienteControlador controlCliente;
     private ClienteDAO cliente;
     private ListaClientesControlador listaClientes;
+    
 
     public ModificacionClienteControlador(int indice, ClienteControlador controlCliente, ClienteDAO cliente, ListaClientesControlador listaClientes) {
         this.indice = indice;
@@ -30,7 +31,8 @@ public class ModificacionClienteControlador {
         this.cliente = cliente;
         this.listaClientes = listaClientes;
         modificCliente = new ModificClienteJPanel();
-        inicializarEventos();       //inicializamos el metodo encargado de escuchar
+        inicializarEventos();
+        //inicializamos el metodo encargado de escuchar
         cargarDatosCliente();
     }
 
@@ -98,8 +100,15 @@ public class ModificacionClienteControlador {
                 int telefono = Integer.parseInt(modificCliente.getjTextField_telefono().getText());
                 String tipo_empresa = modificCliente.getjTextField_TipoEmpresa().getText();
 
-                cliente.getClientes().set(indice,new Cliente(pos, id, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa));
-
+                //tomamos los datos de la clave primaria del objeto para poder identificarlo
+                String cod_original = cliente.getClientes().get(indice).getCod_cliente();
+                String nif_original = cliente.getClientes().get(indice).getNif();
+                //instanciamos un objeto cliente con los datos obtenidos
+                Cliente clienteD = new Cliente(pos, id, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa);
+                //llamamos al metodo para insertar el cliente
+                cliente.actualizar(clienteD, cod_original, nif_original);
+                
+                
                 listaClientes.cargaClientes();
                 controlCliente.volverLista();
             }

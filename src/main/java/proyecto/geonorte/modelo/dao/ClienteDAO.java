@@ -83,7 +83,7 @@ public class ClienteDAO {
             System.out.println(cantidadFilas + " fila/s insertadas");
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error al insertar" + e.getMessage());
         }
     }
 
@@ -110,7 +110,7 @@ public class ClienteDAO {
             System.out.println(cantidadFilas + " fila/s modificadas");
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error al actualizar" + e.getMessage());
         }
     }
 
@@ -126,7 +126,7 @@ public class ClienteDAO {
             System.out.println(cantidadFilas + " fila/s borradas");
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error al borrar " + e.getMessage());
         }
     }
 }
