@@ -17,13 +17,11 @@ import proyecto.geonorte.vista.ListaClientesJPanel;
 public class ListaClientesControlador {
     
     private ListaClientesJPanel listaCliente;
-    private ClienteControlador controlCliente;
     private ClienteDAO clienteDAO;
     
     
-    //constructor
-    public ListaClientesControlador(ClienteControlador controlCliente, ClienteDAO clienteDAO) {
-        this.controlCliente = controlCliente;
+    //constructor con parametros para traer las mmismas clases con las uqe trabaja el controlador anterior
+    public ListaClientesControlador(ClienteDAO clienteDAO) {
         this.clienteDAO = clienteDAO;
         listaCliente = new ListaClientesJPanel();
         cargaClientes();
@@ -32,6 +30,7 @@ public class ListaClientesControlador {
     
     //metodo que carga los clientes en la lista
     public void cargaClientes () {
+        //llaammos al metodo que carga los clientes de la base de datos al array
         clienteDAO.cargaClientesBD();
         //tomamos el array de objetos
         ArrayList<String> datosClientes = new ArrayList<>();
@@ -40,6 +39,7 @@ public class ListaClientesControlador {
         //en cada una de las vueltas pasamos el to string al array del jpanel
             datosClientes.add(cliente.toString());
         }
+        //pasamos la lista al panel
         listaCliente.getjList_Clientes().setListData(datosClientes.toArray(new String[0]));
     }
     

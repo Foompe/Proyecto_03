@@ -193,11 +193,6 @@ public class NuevoClienteJPanel extends javax.swing.JPanel {
         jRadioButton_EmpresaUnica.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jRadioButton_EmpresaUnica.setForeground(new java.awt.Color(0, 51, 51));
         jRadioButton_EmpresaUnica.setText("Empresa única");
-        jRadioButton_EmpresaUnica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton_EmpresaUnicaActionPerformed(evt);
-            }
-        });
 
         jRadioButton_GrupoEmpresas.setBackground(new java.awt.Color(245, 243, 239));
         buttonGroup1.add(jRadioButton_GrupoEmpresas);
@@ -369,10 +364,6 @@ public class NuevoClienteJPanel extends javax.swing.JPanel {
 
         add(jPanelCen, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jRadioButton_EmpresaUnicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_EmpresaUnicaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton_EmpresaUnicaActionPerformed
 
     private void jTextField_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_IDActionPerformed
         // TODO add your handling code here:

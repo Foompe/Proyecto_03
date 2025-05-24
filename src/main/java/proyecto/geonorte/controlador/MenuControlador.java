@@ -20,17 +20,18 @@ public class MenuControlador {
     
     
     public MenuControlador () {
-        menu = new MenuJFrame();
+        menu = new MenuJFrame();    //instanciamos la vista
         inicializarEventos();       //inicializamos el metodo encargado de escuchar
         
-        menu.setVisible(true);
+        menu.setVisible(true);      //mostramos la vista
     }
     
+    //escuchamos cada boton, cada uno nos lleva a su controlador correspondiente
     private void inicializarEventos() {
         menu.getjButtonCliente().addActionListener(new ActionListener() { 
             public void actionPerformed(ActionEvent e) {
                 new ClienteControlador(menu);
-                menu.setVisible(false);
+                menu.setVisible(false);         //ocualtamos la interfaz de menu
             }
         });
         
@@ -70,6 +71,5 @@ public class MenuControlador {
                 System.exit(0);
             }
         });
-    }
-    
+    }   
 }

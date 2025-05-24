@@ -14,6 +14,8 @@ import proyecto.geonorte.controlador.MenuControlador;
 public class Main {
 
     public static void main(String[] args) {
+        
+        //llamamos al controlador principal
       new MenuControlador();      
     }
 }

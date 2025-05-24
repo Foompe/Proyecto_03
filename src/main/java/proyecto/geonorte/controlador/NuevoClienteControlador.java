@@ -21,19 +21,13 @@ public class NuevoClienteControlador {
     private NuevoClienteJPanel nuevoCliente;
     private ClienteControlador controlCliente;
     private ClienteDAO clienteDAO;
-    private ListaClientesControlador listaClientes;
 
-    public NuevoClienteControlador(ClienteControlador controlCliente, ClienteDAO clienteDAO, ListaClientesControlador listaClientes) {
+    public NuevoClienteControlador(ClienteControlador controlCliente, ClienteDAO clienteDAO) {
         this.controlCliente = controlCliente;
         this.clienteDAO = clienteDAO;
-        this.listaClientes = listaClientes;
         nuevoCliente = new NuevoClienteJPanel();
         inicializarEventos();       //inicializamos el metodo encargado de escuchar
-
-    }
-
-    public JPanel getVista() {
-        return nuevoCliente;
+        controlCliente.mostrarPanelCentral(nuevoCliente);
     }
 
     private void inicializarEventos() {
@@ -41,7 +35,7 @@ public class NuevoClienteControlador {
             public void actionPerformed(ActionEvent e) {
                 //acciones del boton guardar (almacenar todos los datos en el objeto)
                 String pos = "0";
-                
+                //comprobamos que los todos los campos esten completos
                 if (nuevoCliente.getjTextField_ID().getText().isEmpty()
                         || nuevoCliente.getjTextField_nif().getText().isEmpty()
                         || nuevoCliente.getjTextField_RazonSocial().getText().isEmpty()
@@ -52,11 +46,14 @@ public class NuevoClienteControlador {
                         || nuevoCliente.getjTextField_telefono().getText().isEmpty()
                         || nuevoCliente.getjTextField_TipoEmpresa().getText().isEmpty() ||
                         (!nuevoCliente.getjRadioButton_EmpresaUnica().isSelected() && !nuevoCliente.getjRadioButton_GrupoEmpresas().isSelected())) {
-                    JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
-                    System.out.println("Faltan campos por completar");
+                    
+                    //si faltan campos por completar saltara un mensaje y no dejara continuar
+                    JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios."); 
                     return;
                 }
                 
+                //capturamos la excepcion que manda el programa si no se ponen datos de tipo numerico
+                try {
                 if (nuevoCliente.getjRadioButton_EmpresaUnica().isSelected()) {
                     pos = "E";
                 } else if (nuevoCliente.getjRadioButton_GrupoEmpresas().isSelected()) {
@@ -71,14 +68,20 @@ public class NuevoClienteControlador {
                 int cod_postal = Integer.parseInt(nuevoCliente.getjTextField_cp().getText());
                 int telefono = Integer.parseInt(nuevoCliente.getjTextField_telefono().getText());
                 String tipo_empresa = nuevoCliente.getjTextField_TipoEmpresa().getText();
-
-                //instanciamos un objeto cliente con los datos obtenidos
-                Cliente cliente = new Cliente(pos, id, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa);
+                
+                 //instanciamos un objeto cliente con los datos obtenidos
+                String cod_cliente = pos.concat(id);
+                Cliente cliente = new Cliente(cod_cliente, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa);
                 //llamamos al metodo para insertar el cliente
                 clienteDAO.insertar(cliente);
                 
-                listaClientes.cargaClientes();
+                //llamamos al metodo que nos devuelve a la lista
                 controlCliente.volverLista();
+
+                } catch (NumberFormatException z) {
+                    JOptionPane.showMessageDialog(null, "En campos númericos debes introducir números");
+                }
+               
             }
         });
 

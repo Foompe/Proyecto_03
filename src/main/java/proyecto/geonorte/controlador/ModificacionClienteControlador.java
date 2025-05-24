@@ -22,17 +22,17 @@ public class ModificacionClienteControlador {
     private ModificClienteJPanel modificCliente;
     private ClienteControlador controlCliente;
     private ClienteDAO cliente;
-    private ListaClientesControlador listaClientes;
 
-    public ModificacionClienteControlador(int indice, ClienteControlador controlCliente, ClienteDAO cliente, ListaClientesControlador listaClientes) {
+
+    public ModificacionClienteControlador(int indice, ClienteControlador controlCliente, ClienteDAO cliente) {
         this.indice = indice;
         this.controlCliente = controlCliente;
         this.cliente = cliente;
-        this.listaClientes = listaClientes;
+        
         modificCliente = new ModificClienteJPanel();
-        inicializarEventos();
-        //inicializamos el metodo encargado de escuchar
-        cargarDatosCliente();
+        controlCliente.mostrarPanelCentral(modificCliente);
+        inicializarEventos();   //inicializamos el metodo encargado de escuchar
+        cargarDatosCliente();   //llamamos al metodo encargado de cargar los datos del cliente
     }
 
     public void cargarDatosCliente() {
@@ -59,9 +59,6 @@ public class ModificacionClienteControlador {
         modificCliente.getjTextField_TipoEmpresa().setText(cliente.getClientes().get(indice).getTipo_empresa());
     }
 
-    public JPanel getVista() {
-        return modificCliente;
-    }
 
     private void inicializarEventos() {
         modificCliente.getjButtonGuardar().addActionListener(new ActionListener() {
@@ -103,11 +100,11 @@ public class ModificacionClienteControlador {
                     String cod_original = cliente.getClientes().get(indice).getCod_cliente();
                     String nif_original = cliente.getClientes().get(indice).getNif();
                     //instanciamos un objeto cliente con los datos obtenidos
-                    Cliente clienteD = new Cliente(pos, id, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa);
+                    String cod_client = pos.concat(id);
+                    Cliente clienteD = new Cliente(cod_client, nif, razon_social, calle, numero, localidad, cod_postal, telefono, tipo_empresa);
                     //llamamos al metodo para insertar el cliente
                     cliente.actualizar(clienteD, cod_original, nif_original);
 
-                    listaClientes.cargaClientes();
                     controlCliente.volverLista();
 
                 } catch (NumberFormatException z) {

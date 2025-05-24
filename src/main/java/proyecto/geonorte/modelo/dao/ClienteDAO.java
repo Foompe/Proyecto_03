@@ -23,9 +23,8 @@ public class ClienteDAO {
 
     //constructor
     public ClienteDAO() {
-        clientes = new ArrayList<>();
-        cargaClientesBD();
-        
+        clientes = new ArrayList<>(); //inicializa el arraylist donde almacenaremos los datos de los clientes de la base de datos
+        cargaClientesBD();            //llamamos al metodo encargado de cargar los clientes de la base al array
     }
 
     //metood para acceder al arraylist
@@ -33,18 +32,17 @@ public class ClienteDAO {
         return clientes;
     }
 
-    //Metodo añadir cliente desde controlador con parametros
-    //Metodo editar cliente desde controlador con parametros
-    //Metodo para pasar una lista de los datos de los clientes
     //metodos con la base de datos:
     public void cargaClientesBD() {
-        clientes.clear();
-        String sentencia = "SELECT * FROM CLIENTE";
-        try (Connection con = ConexionBD.obtenerConexion(); 
+        clientes.clear();   //limpiamos la lista
+        String sentencia = "SELECT * FROM CLIENTE";   //definimos la sentencia a ejecurar
+        try (Connection con = ConexionBD.obtenerConexion();  //lanzamos la conexion
                 PreparedStatement ps = con.prepareStatement(sentencia); 
-                ResultSet rs = ps.executeQuery()) {;
+                ResultSet rs = ps.executeQuery()) {;    //tomamos los resultados 
                    
+                //array que recorre los resultados hasta que termine
             while (rs.next()) {
+                //almacenamos los resultados en un objeto cliente
                  Cliente cliente = new Cliente(
                         rs.getString("COD_CLIENTE"),
                         rs.getString("NIF"),
@@ -56,15 +54,19 @@ public class ClienteDAO {
                         rs.getInt("TLFN"),
                         rs.getString("TIPO_EMPRESA")
                 );
-                 clientes.add(cliente);
+                 clientes.add(cliente); //añadimos el objeto creado al arraylist
             }
-
+            
         } catch (SQLException e) {
             System.out.println("erroe en la carga" + e.getMessage());
         }
     }
 
-    //insercion de cliente
+    /* 
+    Metodo para la insercion de clientes nuevos.
+    -> Definimos la sentencia a ejecutar y completamos cada uno de los campos
+        con su correspondiente de la clase
+    */
     public void insertar(Cliente cliente) {
         String sentencia = "INSERT INTO cliente (cod_cliente, nif, razon_social, calle, numero, localidad, cod_postal, tlfn, tipo_empresa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection con = ConexionBD.obtenerConexion(); PreparedStatement ps = con.prepareStatement(sentencia)) {
@@ -87,7 +89,13 @@ public class ClienteDAO {
         }
     }
 
-    //actualizacion de cliente
+    /*
+    -->MEtodo de actualizacion.
+        Este metodo y el siguiente, a parte del objeto toman dos datos a mayores,
+        si editamos la clave primaria del objeto no tenemos manera de cambiarla
+        por lo tanto tomamos los parametros de este antes de la edicion para poder
+        buscarlo y posteriormente editarlo.
+    */
     public void actualizar(Cliente cliente, String cod_original, String nif_original) {
         String sentencia = "UPDATE cliente SET cod_cliente = ?, nif = ?, razon_social = ?, calle = ?, numero = ?, localidad = ?, cod_postal = ?, tlfn = ?, tipo_empresa = ? WHERE cod_cliente = ? AND nif = ?";
         try (Connection con = ConexionBD.obtenerConexion(); PreparedStatement ps = con.prepareStatement(sentencia)) {
@@ -114,11 +122,13 @@ public class ClienteDAO {
         }
     }
 
-    //borrado cliente
+    //Metodo de borrado de cliente
+    
     public void borrar(Cliente cliente) {
         String sentencia = "DELETE FROM cliente WHERE cod_cliente = ? AND nif = ?";
         try (Connection con = ConexionBD.obtenerConexion(); PreparedStatement ps = con.prepareStatement(sentencia)) {
-
+            
+            //tomamos la clave primaria del dato a borrar en nuestro caso son dos atributos 
             ps.setString(1, cliente.getCod_cliente());
             ps.setString(2, cliente.getNif());
 

@@ -6,12 +6,8 @@ package proyecto.geonorte.controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import proyecto.geonorte.modelo.VO.Cliente;
 import proyecto.geonorte.modelo.dao.ClienteDAO;
 import proyecto.geonorte.vista.ConsultaClienteJPanel;
-import proyecto.geonorte.vista.ModificClienteJPanel;
 
 /**
  *
@@ -26,17 +22,24 @@ public class ConsultaClienteControlador {
     private ListaClientesControlador listaClientes;
 
     public ConsultaClienteControlador(int indice, ClienteControlador controlCliente, ClienteDAO cliente, ListaClientesControlador listaClientes) {
-        this.indice = indice;
+        
+        //copiamos los elementos
+        this.indice = indice; 
         this.controlCliente = controlCliente;
         this.cliente = cliente;
         this.listaClientes = listaClientes;
-        consultaCliente = new ConsultaClienteJPanel();
-        inicializarEventos();       //inicializamos el metodo encargado de escuchar
-        cargarDatosCliente();
-        descativarCampos();
         
+        //instanciamos al vista
+        consultaCliente = new ConsultaClienteJPanel();
+        controlCliente.mostrarPanelCentral(consultaCliente);
+        //llamamos a los distintos metodos de la clase
+        inicializarEventos();       
+        cargarDatosCliente();
+        descativarCampos(); 
     }
 
+    
+    //metodo que carga los datos del cliente en los campos de la interfaz
     public void cargarDatosCliente() {
         //tomamos el codigo de cliente para descomponerlo y mostroarlo
         String cod = cliente.getClientes().get(indice).getCod_cliente();
@@ -50,6 +53,7 @@ public class ConsultaClienteControlador {
             consultaCliente.getjRadioButton_GrupoEmpresas().setSelected(true);
         }
         
+        //rellenamos el resto de campos
         consultaCliente.getjTextField_ID().setText(id);
         consultaCliente.getjTextField_nif().setText(cliente.getClientes().get(indice).getNif());
         consultaCliente.getjTextField_RazonSocial().setText(cliente.getClientes().get(indice).getRazon_social());
@@ -61,10 +65,7 @@ public class ConsultaClienteControlador {
         consultaCliente.getjTextField_TipoEmpresa().setText(cliente.getClientes().get(indice).getTipo_empresa());
     }
 
-    public JPanel getVista() {
-        return consultaCliente;
-    }
-
+    
     private void inicializarEventos() {    
         consultaCliente.getjButtonCancelar().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -74,6 +75,7 @@ public class ConsultaClienteControlador {
         });
     }
     
+    //metodo que desactiva todos los campos para uqe solo se puedan consultar
     public void descativarCampos() {
         consultaCliente.getjRadioButton_EmpresaUnica().setEnabled(false);
         consultaCliente.getjRadioButton_GrupoEmpresas().setEnabled(false);
@@ -86,6 +88,6 @@ public class ConsultaClienteControlador {
         consultaCliente.getjTextField_Localidad().setEditable(false);
         consultaCliente.getjTextField_telefono().setEditable(false);
         consultaCliente.getjTextField_TipoEmpresa().setEditable(false);
-        consultaCliente.getjButtonGuardar().setVisible(false);
+        consultaCliente.getjButtonGuardar().setVisible(false);      //tambien desactivamos el boton de guardar
     }
 }
